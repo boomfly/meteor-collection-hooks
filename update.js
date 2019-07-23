@@ -32,7 +32,8 @@ CollectionHooks.defineAdvice('update', function (userId, _super, instance, aspec
       // copy originals for convenience for the 'after' pointcut
       if (!_.isEmpty(aspects.after)) {
         prev.mutator = EJSON.clone(args[1])
-        prev.options = EJSON.clone(args[2])
+        // prev.options = EJSON.clone(args[2])
+        prev.options = args[2]
         if (
           _.some(aspects.after, function (o) { return o.options.fetchPrevious !== false }) &&
           CollectionHooks.extendOptions(instance.hookOptions, {}, 'after', 'update').fetchPrevious !== false
