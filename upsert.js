@@ -31,8 +31,8 @@ CollectionHooks.defineAdvice('upsert', function (userId, _super, instance, aspec
       if (_.some(aspectGroup.update.after, function (o) { return o.options.fetchPrevious !== false }) &&
           CollectionHooks.extendOptions(instance.hookOptions, {}, 'after', 'update').fetchPrevious !== false) {
         prev.mutator = EJSON.clone(args[1])
-        // prev.options = EJSON.clone(args[2])
-        prev.options = args[2]
+        prev.options = EJSON.clone(_.omit(args[2]))
+        // prev.options = args[2]
         prev.docs = {}
         _.each(docs, function (doc) {
           prev.docs[doc._id] = EJSON.clone(doc)
